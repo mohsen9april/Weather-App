@@ -20,18 +20,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let date = Date()
     let calendar = Calendar.current
     
-    
-    
+    // Hookup UI
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var tempretureLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    
     @IBOutlet weak var changeCityTextField: UITextField!
-    
-    
-    
     
     //Declare instance variables
     let locationmanager = CLLocationManager()
@@ -57,11 +52,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             
             let longtitude = String(location.coordinate.longitude)
             let latitude = String(location.coordinate.latitude)
-            
             let params : [String : String] = ["lat": latitude , "lon": longtitude, "appid": APP_ID]
-            
+        
             getWeatherData(url: WEATHER_URL, parameters: params)
-            //getWeatherData(lat : latitude , long: longtitude )
         }
     }
     
@@ -167,13 +160,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 let weatherCityJSON : JSON = JSON(response.result.value!)
                 print(weatherCityJSON)
                 self.ParsingWeatherData(json: weatherCityJSON)
-                
-            } else {
-                print("Error \(String(describing: response.result.error))")
+                } else {
+                    print("Error \(String(describing: response.result.error))")
                 
             }
         }
     }
-    
 }
 

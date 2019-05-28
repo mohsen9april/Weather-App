@@ -15,6 +15,18 @@ class WeatherDataModel{
     var city : String = ""
     var temp: String = ""
     var weatherIconName : String = ""
+    
+    var condition1 : Int = 0
+    var condition2 : Int = 0
+    var condition3 : Int = 0
+    var condition4 : Int = 0
+    var condition5 : Int = 0
+    
+    var weatherIconName1 : String = ""
+    var weatherIconName2 : String = ""
+    var weatherIconName3 : String = ""
+    var weatherIconName4 : String = ""
+    var weatherIconName5 : String = ""
 
 
 //This method turns a condition code into the name of the weather condition image

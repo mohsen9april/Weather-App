@@ -1,3 +1,4 @@
+
 //
 //  ViewController.swift
 //  My_Weather_App
@@ -27,16 +28,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var tempretureLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    @IBOutlet weak var chnageCityTextField: UITextField!
+    @IBOutlet weak var changeCityTextField: UITextField!
     
     
- 
+    
     
     //Declare instance variables
     let locationmanager = CLLocationManager()
     let weatherdatamodel = WeatherDataModel()
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,10 +45,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         locationmanager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationmanager.requestWhenInUseAuthorization()
         locationmanager.startUpdatingLocation()
-        
-        
-
-        
     }
     
     
@@ -61,7 +58,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             let longtitude = String(location.coordinate.longitude)
             let latitude = String(location.coordinate.latitude)
             
-            getWeatherData(lat : latitude , long: longtitude )
+            let params : [String : String] = ["lat": latitude , "lon": longtitude, "appid": APP_ID]
+            
+            getWeatherData(url: WEATHER_URL, parameters: params)
+            //getWeatherData(lat : latitude , long: longtitude )
         }
     }
     
@@ -70,13 +70,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     //MARK: - GetWeatherData From API
-    func getWeatherData(lat: String , long: String){
-    let WEATHER_URL1 = "http://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(long)&appid=db492be2c9ffb3c34e5d05c39e837bf1"
+    // Type of Get Data From API is Location (Lan & Lon ) & APP ID
+    
+    func getWeatherData(url: String, parameters: [String : String] ){
         
-        Alamofire.request(WEATHER_URL1).responseJSON { (response) in
+        Alamofire.request(url, method: .get , parameters: parameters).responseJSON { response in
             if response.result.isSuccess {
-                print("SUCCESS! Got the weather data from API")
-                //print(response)
+                print("Success ! got the weather data")
                 
                 let weatherJSON : JSON = JSON(response.result.value!)
                 print(weatherJSON)
@@ -84,10 +84,30 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 
             } else {
                 print("Error \(String(describing: response.result.error))")
-                //self.cityLabel.text = "Connection Issues"
+                self.cityLabel.text = "Connection Issues !"
             }
         }
     }
+    
+    
+    //    func getWeatherData(lat: String , long: String){
+    //    let WEATHER_URL1 = "http://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(long)&appid=db492be2c9ffb3c34e5d05c39e837bf1"
+    //
+    //        Alamofire.request(WEATHER_URL1).responseJSON { (response) in
+    //            if response.result.isSuccess {
+    //                print("SUCCESS! Got the weather data from API")
+    //                //print(response)
+    //
+    //                let weatherJSON : JSON = JSON(response.result.value!)
+    //                print(weatherJSON)
+    //                self.ParsingWeatherData(json: weatherJSON)
+    //
+    //            } else {
+    //                print("Error \(String(describing: response.result.error))")
+    //                //self.cityLabel.text = "Connection Issues"
+    //            }
+    //        }
+    //    }
     
     
     //MARK: - Parsing Current Weather Data JSON Formant
@@ -99,9 +119,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         weatherdatamodel.temperature = Int(result - 273.15)
         weatherdatamodel.condition = json["weather"][0]["id"].intValue
         weatherdatamodel.weatherIconName = weatherdatamodel.updateWeatherIcon(condition: weatherdatamodel.condition)
-        
         updateUIWeatherDataModel()
-
+        
     }
     
     //MARK: - Update UI WeatherData
@@ -124,28 +143,30 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let month = components.month
         let day = components.day
         print("\(day!).\(month!).\(year!)")
-        
         dateLabel.text = "\(day!).\(month!).\(year!)"
     }
     
-    
     @IBAction func chnageCityButton(_ sender: Any) {
         
-        let city = chnageCityTextField.text
-        let params: [String : String] = ["q": city! , "appid" : APP_ID]
-        getForecastWeatherData(url: WEATHER_URL, parameters: params)
-        
+        if changeCityTextField != nil {
+            let city = changeCityTextField.text
+            let params: [String : String] = ["q": city! , "appid" : APP_ID]
+            getCitytWeatherData(url: WEATHER_URL, parameters: params)
+        } else {
+            return
+        }
     }
     
     //MARK: - Get Forecast Weather Data
-    func getForecastWeatherData(url: String, parameters: [String : String] ){
+    // Type of Get Data From API is City & APP ID
+    func getCitytWeatherData(url: String, parameters: [String : String] ){
         
         Alamofire.request(url, method: .get , parameters: parameters).responseJSON { response in
             if response.result.isSuccess {
-                print("Success ! got the Forecast weather data")
-                
-                let forecastWeatherJSON : JSON = JSON(response.result.value!)
-                print(forecastWeatherJSON)
+                print("Success ! got the City  weather data")
+                let weatherCityJSON : JSON = JSON(response.result.value!)
+                print(weatherCityJSON)
+                self.ParsingWeatherData(json: weatherCityJSON)
                 
             } else {
                 print("Error \(String(describing: response.result.error))")
@@ -154,12 +175,5 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    //MARK: - Update Forecast Weather data
-    func updateForecastWeatherData(json: JSON){
-        
-    }
-
-    
-
 }
 

@@ -41,7 +41,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="yes" textContentType="location"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HII-Ji-Hyi">
                                 <rect key="frame" x="152.66666666666666" y="292" width="70" height="45"/>
@@ -110,7 +110,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="chnageCityTextField" destination="CGT-I0-2n4" id="hCs-hk-cqZ"/>
+                        <outlet property="changeCityTextField" destination="CGT-I0-2n4" id="p7v-P0-NTw"/>
                         <outlet property="cityLabel" destination="2FQ-na-xG5" id="aS7-ds-S4d"/>
                         <outlet property="conditionImageView" destination="gsK-Ln-Mxk" id="xG6-9f-xpg"/>
                         <outlet property="dateLabel" destination="sCY-Ad-RPm" id="LwV-xZ-ida"/>

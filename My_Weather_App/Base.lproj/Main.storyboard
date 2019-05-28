@@ -43,13 +43,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="I3t-Tz-Q6J">
-                                <rect key="frame" x="325" y="55" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="fXn-hO-wI2"/>
-                                    <constraint firstAttribute="width" constant="40" id="n0J-Mb-Gkw"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HII-Ji-Hyi">
                                 <rect key="frame" x="152.66666666666666" y="292" width="70" height="45"/>
                                 <constraints>
@@ -77,22 +70,33 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xfV-Rb-qaI">
+                                <rect key="frame" x="325" y="55" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Cud-55-rgP"/>
+                                    <constraint firstAttribute="width" constant="40" id="dxh-5T-wIj"/>
+                                </constraints>
+                                <state key="normal" image="search"/>
+                                <connections>
+                                    <action selector="chnageCityButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gf0-yG-g4K"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="xfV-Rb-qaI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="11" id="0QT-yb-eXt"/>
                             <constraint firstItem="HII-Ji-Hyi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0yk-Ge-cCr"/>
                             <constraint firstItem="CGT-I0-2n4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="2WC-2V-yOn"/>
                             <constraint firstItem="sCY-Ad-RPm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2bJ-7U-iAa"/>
                             <constraint firstItem="CGT-I0-2n4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="6wP-Hl-Zx1"/>
-                            <constraint firstItem="I3t-Tz-Q6J" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="11" id="7dX-vy-wIv"/>
                             <constraint firstAttribute="bottom" secondItem="2O9-GW-353" secondAttribute="bottom" id="8ng-hf-Ar1"/>
                             <constraint firstItem="2FQ-na-xG5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="CWE-cV-7DX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5iL-ef-goM" secondAttribute="trailing" constant="70" id="NZJ-Qa-kEU"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="I3t-Tz-Q6J" secondAttribute="trailing" constant="10" id="RY1-1M-qIO"/>
                             <constraint firstAttribute="trailing" secondItem="2O9-GW-353" secondAttribute="trailing" id="b68-Lt-Gg1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2FQ-na-xG5" secondAttribute="trailing" constant="70" id="cjS-hT-yby"/>
                             <constraint firstItem="5iL-ef-goM" firstAttribute="top" secondItem="2FQ-na-xG5" secondAttribute="bottom" constant="16" id="eYn-MZ-W1r"/>
                             <constraint firstItem="5iL-ef-goM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="fFb-jQ-WHT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xfV-Rb-qaI" secondAttribute="trailing" constant="10" id="i4x-X0-yEB"/>
                             <constraint firstItem="gsK-Ln-Mxk" firstAttribute="top" secondItem="5iL-ef-goM" secondAttribute="bottom" constant="16" id="nUB-8Z-RHs"/>
                             <constraint firstItem="5iL-ef-goM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oG4-sO-rhb"/>
                             <constraint firstItem="gsK-Ln-Mxk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oGN-UI-Kt3"/>
@@ -106,6 +110,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="chnageCityTextField" destination="CGT-I0-2n4" id="hCs-hk-cqZ"/>
                         <outlet property="cityLabel" destination="2FQ-na-xG5" id="aS7-ds-S4d"/>
                         <outlet property="conditionImageView" destination="gsK-Ln-Mxk" id="xG6-9f-xpg"/>
                         <outlet property="dateLabel" destination="sCY-Ad-RPm" id="LwV-xZ-ida"/>

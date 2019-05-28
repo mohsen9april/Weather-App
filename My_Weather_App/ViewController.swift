@@ -27,6 +27,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var tempretureLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
+    @IBOutlet weak var chnageCityTextField: UITextField!
     
     
  
@@ -60,7 +61,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             let longtitude = String(location.coordinate.longitude)
             let latitude = String(location.coordinate.latitude)
             
-            //let params: [String : String] = ["lat" : latitude, "long": longtitude, "appid": APP_ID]
             getWeatherData(lat : latitude , long: longtitude )
         }
     }
@@ -127,7 +127,39 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         dateLabel.text = "\(day!).\(month!).\(year!)"
     }
+    
+    
+    @IBAction func chnageCityButton(_ sender: Any) {
+        
+        let city = chnageCityTextField.text
+        let params: [String : String] = ["q": city! , "appid" : APP_ID]
+        getForecastWeatherData(url: WEATHER_URL, parameters: params)
+        
+    }
+    
+    //MARK: - Get Forecast Weather Data
+    func getForecastWeatherData(url: String, parameters: [String : String] ){
+        
+        Alamofire.request(url, method: .get , parameters: parameters).responseJSON { response in
+            if response.result.isSuccess {
+                print("Success ! got the Forecast weather data")
+                
+                let forecastWeatherJSON : JSON = JSON(response.result.value!)
+                print(forecastWeatherJSON)
+                
+            } else {
+                print("Error \(String(describing: response.result.error))")
+                
+            }
+        }
+    }
+    
+    //MARK: - Update Forecast Weather data
+    func updateForecastWeatherData(json: JSON){
+        
+    }
 
+    
 
 }
 

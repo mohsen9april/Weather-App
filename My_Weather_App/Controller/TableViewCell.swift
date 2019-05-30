@@ -11,7 +11,8 @@ import UIKit
 class TableViewCell: UITableViewCell {
     
     @IBOutlet weak var dayTableViewCell: UILabel!
-    @IBOutlet weak var imageTableViewCrell: UIImageView!
+    @IBOutlet weak var imageTableViewCell: UIImageView!
+    @IBOutlet weak var tempSituationTableViewCell: UILabel!
     @IBOutlet weak var tempratureTableViewCell: UILabel!
     
     

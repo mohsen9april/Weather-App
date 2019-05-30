@@ -61,10 +61,10 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCY-Ad-RPm">
-                                <rect key="frame" x="112.66666666666669" y="349" width="150" height="20"/>
+                                <rect key="frame" x="62.666666666666657" y="349" width="249.99999999999997" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="CnD-rx-SaZ"/>
-                                    <constraint firstAttribute="width" constant="150" id="zuC-qh-KaL"/>
+                                    <constraint firstAttribute="width" constant="250" id="zuC-qh-KaL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -100,8 +100,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLL-3m-a3r">
-                                                    <rect key="frame" x="312" y="10" width="57" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Clear" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLL-3m-a3r">
+                                                    <rect key="frame" x="212" y="9" width="57" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="textColor"/>
@@ -111,13 +111,21 @@
                                                     <rect key="frame" x="277" y="6" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RhQ-15-1kB">
+                                                    <rect key="frame" x="326" y="11" width="36" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="dayTableViewCell" destination="wWB-eu-kja" id="CPZ-9m-5OJ"/>
-                                            <outlet property="imageTableViewCrell" destination="I0u-Nb-Wr0" id="cSg-dK-MI1"/>
-                                            <outlet property="tempratureTableViewCell" destination="cLL-3m-a3r" id="JOD-zk-kM6"/>
+                                            <outlet property="imageTableViewCell" destination="I0u-Nb-Wr0" id="cSg-dK-MI1"/>
+                                            <outlet property="tempSituationTableViewCell" destination="cLL-3m-a3r" id="JOD-zk-kM6"/>
+                                            <outlet property="tempratureTableViewCell" destination="RhQ-15-1kB" id="RVi-Zd-Tes"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

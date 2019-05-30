@@ -12,11 +12,12 @@ import CoreLocation
 import Alamofire
 import SwiftyJSON
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
     
+
     //Constants
     let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
-    let WEATHER_URL1 = "http://api.openweathermap.org/data/2.5/forecast/daily"
+    let WEATHER_URL_FORECAST = "http://api.openweathermap.org/data/2.5/forecast/daily"
     let APP_ID = "e72ca729af228beabd5d20e3b7749713"
     let date = Date()
     let calendar = Calendar.current
@@ -43,6 +44,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var imageday5: UIImageView!
     
     
+    @IBOutlet weak var myTableView: UITableView!
+    
     
     //Declare instance variables
     let locationmanager = CLLocationManager()
@@ -52,6 +55,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        myTableView.delegate = self
+        myTableView.dataSource = self
         
         locationmanager.delegate = self
         locationmanager.desiredAccuracy = kCLLocationAccuracyHundredMeters
@@ -72,7 +78,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             let params : [String : String] = ["lat": latitude , "lon": longtitude, "appid": APP_ID]
         
             getWeatherData(url: WEATHER_URL, parameters: params)
-            getForecastWeatherData(url: WEATHER_URL1, parameters: params)
+            getForecastWeatherData(url: WEATHER_URL_FORECAST, parameters: params)
         }
     }
     
@@ -162,7 +168,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             let city = changeCityTextField.text
             let params: [String : String] = ["q": city! , "appid" : APP_ID]
             getCitytWeatherData(url: WEATHER_URL, parameters: params)
-            getForecastWeatherData(url: WEATHER_URL1, parameters: params)
+            getForecastWeatherData(url: WEATHER_URL_FORECAST, parameters: params)
             
         } else {
             return
@@ -191,7 +197,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     func getForecastWeatherData(url: String, parameters: [String : String] ){
         
-        Alamofire.request(url, method: .get , parameters: parameters).responseJSON { response in
+        Alamofire.request(WEATHER_URL_FORECAST, method: .get , parameters: parameters).responseJSON { response in
             if response.result.isSuccess {
                 print("Success ! got the  Forcast weather data")
                 
@@ -260,6 +266,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         imageday5.image = UIImage(named: weatherdatamodel.weatherIconName5)
     
     }
+    
+    
+    var dayofweek = ["Monday","Tuesday","Wendsday","Thursday","Friday","saturday","Sunday"]
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dayofweek.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
+        cell.dayTableViewCell.text = dayofweek[indexPath.row]
+        return cell
+    }
+    
     
     
     

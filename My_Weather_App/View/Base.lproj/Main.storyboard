@@ -61,7 +61,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCY-Ad-RPm">
-                                <rect key="frame" x="62.666666666666657" y="349" width="249.99999999999997" height="20"/>
+                                <rect key="frame" x="62.666666666666657" y="342" width="249.99999999999997" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="CnD-rx-SaZ"/>
                                     <constraint firstAttribute="width" constant="250" id="zuC-qh-KaL"/>
@@ -103,7 +103,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Clear" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLL-3m-a3r">
                                                     <rect key="frame" x="212" y="9" width="57" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -149,7 +149,7 @@
                             <constraint firstItem="gsK-Ln-Mxk" firstAttribute="top" secondItem="5iL-ef-goM" secondAttribute="bottom" constant="16" id="nUB-8Z-RHs"/>
                             <constraint firstItem="5iL-ef-goM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oG4-sO-rhb"/>
                             <constraint firstItem="gsK-Ln-Mxk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oGN-UI-Kt3"/>
-                            <constraint firstItem="sCY-Ad-RPm" firstAttribute="top" secondItem="HII-Ji-Hyi" secondAttribute="bottom" constant="12" id="pRE-fK-zRi"/>
+                            <constraint firstItem="sCY-Ad-RPm" firstAttribute="top" secondItem="HII-Ji-Hyi" secondAttribute="bottom" constant="5" id="pRE-fK-zRi"/>
                             <constraint firstItem="2O9-GW-353" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="tLz-AV-lIY"/>
                             <constraint firstItem="HII-Ji-Hyi" firstAttribute="top" secondItem="gsK-Ln-Mxk" secondAttribute="bottom" constant="10" id="tfC-oM-npB"/>
                             <constraint firstItem="2FQ-na-xG5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vs7-5D-XWm"/>

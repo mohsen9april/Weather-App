@@ -14,7 +14,6 @@
 		ED0317D9229D02A3007F8BF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED0317D8229D02A3007F8BF7 /* Assets.xcassets */; };
 		ED0317DC229D02A3007F8BF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED0317DA229D02A3007F8BF7 /* LaunchScreen.storyboard */; };
 		ED0317E4229D1865007F8BF7 /* WeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0317E3229D1865007F8BF7 /* WeatherDataModel.swift */; };
-		ED0317E6229D59BE007F8BF7 /* WeatherForecastDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0317E5229D59BE007F8BF7 /* WeatherForecastDataModel.swift */; };
 		EDFBBBDD229D7DE300F7A459 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFBBBDC229D7DE300F7A459 /* Data.swift */; };
 		EDFBBBDF229D7E3300F7A459 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFBBBDE229D7E3300F7A459 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -31,7 +30,6 @@
 		ED0317DB229D02A3007F8BF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED0317DD229D02A3007F8BF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED0317E3229D1865007F8BF7 /* WeatherDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataModel.swift; sourceTree = "<group>"; };
-		ED0317E5229D59BE007F8BF7 /* WeatherForecastDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastDataModel.swift; sourceTree = "<group>"; };
 		EDFBBBDC229D7DE300F7A459 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		EDFBBBDE229D7E3300F7A459 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,7 +98,6 @@
 		EDFBBBD9229D7D5600F7A459 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ED0317E5229D59BE007F8BF7 /* WeatherForecastDataModel.swift */,
 				ED0317E3229D1865007F8BF7 /* WeatherDataModel.swift */,
 				EDFBBBDC229D7DE300F7A459 /* Data.swift */,
 			);
@@ -251,7 +248,6 @@
 				ED0317D4229D02A2007F8BF7 /* ViewController.swift in Sources */,
 				EDFBBBDF229D7E3300F7A459 /* TableViewCell.swift in Sources */,
 				ED0317D2229D02A2007F8BF7 /* AppDelegate.swift in Sources */,
-				ED0317E6229D59BE007F8BF7 /* WeatherForecastDataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,6 +23,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     let calendar = Calendar.current
     
     var tempArray = [String]()
+    var tempratureArray = [Int]()
+    var imageArray = [Int]()
+    var iconArray = [String]()
     var dtArray = [Double]()
     var dateArray = [String]()
     var SomeInt = 0...6
@@ -41,8 +44,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     //Declare instance variables
     let locationmanager = CLLocationManager()
     let weatherdatamodel = WeatherDataModel()
-    let weatherforecastdatamodel = WeatherForecastDataModel()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -166,6 +167,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
                 self.tempArray.removeAll()
                 self.dateArray.removeAll()
                 self.dtArray.removeAll()
+                self.tempratureArray.removeAll()
+                self.imageArray.removeAll()
+                self.iconArray.removeAll()
                 //-------- Type of Sutation ( Clear , Rain , Snow )
                 for m in self.SomeInt {
                     let temp = ForecastweatherJSON["list"][m]["weather"][0]["main"].stringValue
@@ -190,9 +194,26 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
                      */
                 }
                 
+                for m in self.SomeInt {
+                    let temprature = ForecastweatherJSON["list"][m]["temp"]["day"].doubleValue
+                    let temprature1 = Int(temprature - 273.15)
+                    self.tempratureArray.append(temprature1)
+                }
+                
+                for m in self.SomeInt {
+                    let image = ForecastweatherJSON["list"][m]["weather"][0]["id"].intValue
+                    self.imageArray.append(image)
+                    self.weatherdatamodel.weatherIconName = self.weatherdatamodel.updateWeatherIcon(condition: image)
+                    self.iconArray.append(self.weatherdatamodel.weatherIconName)
+                }
+                
+                
                     print(self.tempArray)
                     //print(self.dtArray)
                     print(self.dateArray)
+                    print(self.tempratureArray)
+                    print(self.imageArray)
+                    print(self.iconArray)
                 
                 self.ParsingForecastWeatherData(json: ForecastweatherJSON)
                 
@@ -221,7 +242,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         if tempArray != [String]() {
             cell.tempSituationTableViewCell.text = "\(tempArray[indexPath.row])"
             cell.dayTableViewCell.text = "\(dateArray[indexPath.row])"
-        }
+            cell.tempratureTableViewCell.text = "\(tempratureArray[indexPath.row])"
+            cell.imageTableViewCell.image = UIImage(named: iconArray[indexPath.row])
+            }
         return cell
     }
 }

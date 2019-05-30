@@ -16,8 +16,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     
 
     //Constants
-    let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
-    let WEATHER_URL_FORECAST = "http://api.openweathermap.org/data/2.5/forecast/daily"
+    let WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather"
+    let WEATHER_URL_FORECAST = "https://api.openweathermap.org/data/2.5/forecast/daily"
     let APP_ID = "e72ca729af228beabd5d20e3b7749713"
     let date = Date()
     let calendar = Calendar.current
@@ -30,18 +30,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var changeCityTextField: UITextField!
     
-    @IBOutlet weak var tempday1: UILabel!
-    @IBOutlet weak var tempday2: UILabel!
-    @IBOutlet weak var tempday3: UILabel!
-    @IBOutlet weak var tempday4: UILabel!
-    @IBOutlet weak var tempday5: UILabel!
+
     
     
-    @IBOutlet weak var imageday1: UIImageView!
-    @IBOutlet weak var imageday2: UIImageView!
-    @IBOutlet weak var imageday3: UIImageView!
-    @IBOutlet weak var imageday4: UIImageView!
-    @IBOutlet weak var imageday5: UIImageView!
+ 
     
     
     @IBOutlet weak var myTableView: UITableView!
@@ -76,9 +68,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
             let longtitude = String(location.coordinate.longitude)
             let latitude = String(location.coordinate.latitude)
             let params : [String : String] = ["lat": latitude , "lon": longtitude, "appid": APP_ID]
-        
+            
+            getForecastWeatherData(url1: WEATHER_URL_FORECAST, parameters: params)
             getWeatherData(url: WEATHER_URL, parameters: params)
-            getForecastWeatherData(url: WEATHER_URL_FORECAST, parameters: params)
+            
         }
     }
     
@@ -167,8 +160,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         if changeCityTextField != nil {
             let city = changeCityTextField.text
             let params: [String : String] = ["q": city! , "appid" : APP_ID]
+            
+            //getForecastWeatherData(url1: WEATHER_URL_FORECAST, parameters: params)
             getCitytWeatherData(url: WEATHER_URL, parameters: params)
-            getForecastWeatherData(url: WEATHER_URL_FORECAST, parameters: params)
+            getForecastWeatherData(url1: WEATHER_URL_FORECAST, parameters: params)
+           
             
         } else {
             return
@@ -193,16 +189,26 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     }
     
     
-    
+    var tempArray = [String]()
+    var SomeInt = 1...5
 
-    func getForecastWeatherData(url: String, parameters: [String : String] ){
+    func getForecastWeatherData(url1: String, parameters: [String : String] ){
         
-        Alamofire.request(WEATHER_URL_FORECAST, method: .get , parameters: parameters).responseJSON { response in
+        Alamofire.request(url1, method: .get , parameters: parameters).responseJSON { response in
             if response.result.isSuccess {
                 print("Success ! got the  Forcast weather data")
                 
                 let ForecastweatherJSON : JSON = JSON(response.result.value!)
                 print(ForecastweatherJSON)
+                
+                self.tempArray.removeAll()
+                
+                for m in self.SomeInt {
+                let temp = ForecastweatherJSON["list"][m]["weather"][0]["main"].stringValue
+                print(temp)
+                    self.tempArray.append(temp)
+                }
+                print(self.tempArray)
                 self.ParsingForecastWeatherData(json: ForecastweatherJSON)
                 
             } else {
@@ -227,25 +233,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         
         
         weatherdatamodel.condition1 = json["list"][0]["weather"][0]["id"].intValue
-        print(weatherdatamodel.condition1)
+        //print(weatherdatamodel.condition1)
         weatherdatamodel.weatherIconName1 = weatherdatamodel.updateWeatherIcon(condition: weatherdatamodel.condition1)
         
         
         weatherdatamodel.condition2 = json["list"][1]["weather"][0]["id"].intValue
         weatherdatamodel.weatherIconName2 = weatherdatamodel.updateWeatherIcon(condition: weatherdatamodel.condition2)
-        print(weatherdatamodel.condition2)
+        //print(weatherdatamodel.condition2)
         
         weatherdatamodel.condition3 = json["list"][1]["weather"][0]["id"].intValue
         weatherdatamodel.weatherIconName3 = weatherdatamodel.updateWeatherIcon(condition: weatherdatamodel.condition3)
-        print(weatherdatamodel.condition3)
+        //print(weatherdatamodel.condition3)
         
         weatherdatamodel.condition4 = json["list"][1]["weather"][0]["id"].intValue
         weatherdatamodel.weatherIconName4 = weatherdatamodel.updateWeatherIcon(condition: weatherdatamodel.condition4)
-        print(weatherdatamodel.condition4)
+        //print(weatherdatamodel.condition4)
         
         weatherdatamodel.condition5 = json["list"][1]["weather"][0]["id"].intValue
         weatherdatamodel.weatherIconName5 = weatherdatamodel.updateWeatherIcon(condition: weatherdatamodel.condition5)
-        print(weatherdatamodel.condition5)
+        //print(weatherdatamodel.condition5)
         
         updateForecastUIWeatherDataModel()
         
@@ -253,17 +259,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     
     func updateForecastUIWeatherDataModel() {
         
-        tempday1.text = "\(weatherforecastdatamodel.temp1)"
-        tempday2.text = "\(weatherforecastdatamodel.temp2)"
-        tempday3.text = "\(weatherforecastdatamodel.temp3)"
-        tempday4.text = "\(weatherforecastdatamodel.temp4)"
-        tempday5.text = "\(weatherforecastdatamodel.temp5)"
-        
-        imageday1.image = UIImage(named: weatherdatamodel.weatherIconName1)
-        imageday2.image = UIImage(named: weatherdatamodel.weatherIconName2)
-        imageday3.image = UIImage(named: weatherdatamodel.weatherIconName3)
-        imageday4.image = UIImage(named: weatherdatamodel.weatherIconName4)
-        imageday5.image = UIImage(named: weatherdatamodel.weatherIconName5)
+        self.myTableView.reloadData()
+    
     
     }
     
@@ -272,12 +269,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dayofweek.count
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         cell.dayTableViewCell.text = dayofweek[indexPath.row]
+        if tempArray != [String]() {
+            cell.tempratureTableViewCell.text = "\(tempArray[indexPath.row])" }
         return cell
     }
     

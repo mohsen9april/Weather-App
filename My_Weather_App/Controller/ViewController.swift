@@ -100,6 +100,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         weatherdatamodel.temp = json["weather"][0]["main"].stringValue
         let result = json["main"]["temp"].doubleValue
         weatherdatamodel.temperature = Int(result - 273.15)
+        weatherdatamodel.condition = 0
         weatherdatamodel.condition = json["weather"][0]["id"].intValue
         weatherdatamodel.weatherIconName = weatherdatamodel.updateWeatherIcon(condition: weatherdatamodel.condition)
         updateUICurrentWeatherData()
@@ -115,7 +116,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         conditionImageView.image = UIImage(named: weatherdatamodel.weatherIconName)
         format.dateFormat = "EEEE, d MMM yyyy "
         let today = format.string(from: date)
-        dateLabel.text = today
+        dateLabel.text = "\(today)"
         
         print(weatherdatamodel.city)
         print(weatherdatamodel.temp)
@@ -125,16 +126,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     
     //MARK: - Chnage City Name
     @IBAction func chnageCityButton(_ sender: Any) {
-        if changeCityTextField != nil {
-            let city = changeCityTextField.text
-            let params: [String : String] = ["q": city! , "appid" : APP_ID]
-
-            getCitytWeatherData(url: WEATHER_URL, parameters: params)
-            getForecastWeatherData(url_1: WEATHER_URL_FORECAST, parameters: params)
-           
-        } else {
-            return
-        }
+//        if changeCityTextField != nil {
+//            let city = changeCityTextField.text
+//            let params: [String : String] = ["q": city! , "appid" : APP_ID]
+//
+//            getCitytWeatherData(url: WEATHER_URL, parameters: params)
+//            getForecastWeatherData(url_1: WEATHER_URL_FORECAST, parameters: params)
+//
+//        } else {
+//            return
+//        }
+//
+//        changeCityTextField.text = ""
+        
+        guard let city = changeCityTextField.text , !city.isEmpty else { return }
+        let params: [String : String] = ["q": city , "appid" : APP_ID]
+        getCitytWeatherData(url: WEATHER_URL, parameters: params)
+        getForecastWeatherData(url_1: WEATHER_URL_FORECAST, parameters: params)
+        changeCityTextField.text = ""
     }
     
     //MARK: - Get Forecast Weather Data
@@ -242,10 +251,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         if tempArray != [String]() {
             cell.tempSituationTableViewCell.text = "\(tempArray[indexPath.row])"
             cell.dayTableViewCell.text = "\(dateArray[indexPath.row])"
-            cell.tempratureTableViewCell.text = "\(tempratureArray[indexPath.row])"
+            cell.tempratureTableViewCell.text = "\(tempratureArray[indexPath.row])°"
             cell.imageTableViewCell.image = UIImage(named: iconArray[indexPath.row])
             }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
 }
 
